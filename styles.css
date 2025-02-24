@@ -1,0 +1,1419 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    caret-color: transparent;
+}
+
+input, textarea {
+    caret-color: auto;
+}
+
+:root {
+    /* Colors */
+    --primary-green: #30BD76;
+    --primary-hover: #2aa868;
+    --primary-light: rgba(48, 189, 118, 0.1);
+    --background-light: #F8F9FB;
+    --text-dark: #1A1D1F;
+    --text-gray: #6F767E;
+    --text-light: #9A9FA5;
+    --border-light: #F4F4F4;
+    
+    /* Typography */
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Shadows */
+    --shadow-sm: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0px 8px 16px rgba(0, 0, 0, 0.08);
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    /* Transitions */
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+body {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.5;
+    font-size: var(--font-size-base);
+}
+
+.booking-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    background: transparent;
+}
+
+/* Global CSS for progress bar */
+.clearfix:after,
+.container,
+.wrapper,
+.arrow-steps,
+.arrow-steps .step {
+    display: none;
+}
+
+.container {
+    font-family: 'Lato', sans-serif;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.wrapper {
+    display: table-cell;
+    height: 400px;
+    vertical-align: middle;
+}
+
+/* Progress Bar Styles */
+.arrow-steps {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.arrow-steps .step {
+    font-size: 14px;
+    text-align: center;
+    color: #666;
+    cursor: default;
+    margin: 0 3px;
+    padding: 10px 10px 10px 30px;
+    min-width: 180px;
+    float: left;
+    position: relative;
+    background-color: #d9e3f7;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.arrow-steps .step:after,
+.arrow-steps .step:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: -17px;
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 17px solid #d9e3f7;
+    z-index: 2;
+    transition: border-color 0.2s ease;
+}
+
+.arrow-steps .step:before {
+    right: auto;
+    left: 0;
+    border-left: 17px solid #fff;
+    z-index: 0;
+}
+
+.arrow-steps .step:first-child:before {
+    border: none;
+}
+
+.arrow-steps .step:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.arrow-steps .step span {
+    position: relative;
+}
+
+.arrow-steps .step span:before {
+    opacity: 0;
+    content: "✔";
+    position: absolute;
+    top: -2px;
+    left: -20px;
+}
+
+/* Active state based on form-step */
+.form-step[data-step="1"].active ~ .container .step[data-step="1"],
+.form-step[data-step="2"].active ~ .container .step[data-step="2"],
+.form-step[data-step="3"].active ~ .container .step[data-step="3"],
+.form-step[data-step="4"].active ~ .container .step[data-step="4"] {
+    color: #fff;
+    background-color: #23468c;
+}
+
+.form-step[data-step="1"].active ~ .container .step[data-step="1"]:after,
+.form-step[data-step="2"].active ~ .container .step[data-step="2"]:after,
+.form-step[data-step="3"].active ~ .container .step[data-step="3"]:after,
+.form-step[data-step="4"].active ~ .container .step[data-step="4"]:after {
+    border-left-color: #23468c;
+}
+
+/* Completed steps */
+.form-step[data-step="2"].active ~ .container .step[data-step="1"],
+.form-step[data-step="3"].active ~ .container .step[data-step="1"],
+.form-step[data-step="3"].active ~ .container .step[data-step="2"],
+.form-step[data-step="4"].active ~ .container .step[data-step="1"],
+.form-step[data-step="4"].active ~ .container .step[data-step="2"],
+.form-step[data-step="4"].active ~ .container .step[data-step="3"] {
+    background-color: #23468c;
+    color: #fff;
+}
+
+.form-step[data-step="2"].active ~ .container .step[data-step="1"]:after,
+.form-step[data-step="3"].active ~ .container .step[data-step="1"]:after,
+.form-step[data-step="3"].active ~ .container .step[data-step="2"]:after,
+.form-step[data-step="4"].active ~ .container .step[data-step="1"]:after,
+.form-step[data-step="4"].active ~ .container .step[data-step="2"]:after,
+.form-step[data-step="4"].active ~ .container .step[data-step="3"]:after {
+    border-left-color: #23468c;
+}
+
+/* Add checkmark to completed steps */
+.form-step[data-step="2"].active ~ .container .step[data-step="1"] span:before,
+.form-step[data-step="3"].active ~ .container .step[data-step="1"] span:before,
+.form-step[data-step="3"].active ~ .container .step[data-step="2"] span:before,
+.form-step[data-step="4"].active ~ .container .step[data-step="1"] span:before,
+.form-step[data-step="4"].active ~ .container .step[data-step="2"] span:before,
+.form-step[data-step="4"].active ~ .container .step[data-step="3"] span:before {
+    opacity: 1;
+    -webkit-transition: opacity 0.3s ease 0.5s;
+    -moz-transition: opacity 0.3s ease 0.5s;
+    -ms-transition: opacity 0.3s ease 0.5s;
+    transition: opacity 0.3s ease 0.5s;
+}
+
+/* Set first step as current by default */
+.form-step[data-step="1"].active ~ .container .step[data-step="1"] {
+    color: #fff;
+    background-color: #23468c;
+}
+
+.form-step[data-step="1"].active ~ .container .step[data-step="1"]:after {
+    border-left-color: #23468c;
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .arrow-steps .step {
+        min-width: auto;
+        padding: 8px 8px 8px 25px;
+        font-size: 12px;
+    }
+
+    .arrow-steps .step:after,
+    .arrow-steps .step:before {
+        border-top-width: 17px;
+        border-bottom-width: 17px;
+        border-left-width: 15px;
+        right: -15px;
+    }
+}
+
+/* Step Title */
+.step-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+    width: 100%;
+}
+
+/* Form elements */
+.form-group label {
+    display: block;
+    color: #344054;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: var(--font-size-sm);
+}
+
+select, input, textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #E4E7EC;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 120px;
+    height: auto;
+    resize: vertical;
+    padding: 12px;
+}
+
+.helper-text {
+    color: var(--text-gray);
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Calendar Styles */
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    color: #333;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(48%) sepia(0%) saturate(1926%) hue-rotate(86deg) brightness(94%) contrast(90%);
+    opacity: 1;
+    margin: 0;
+    padding-right: 4px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 8px;
+}
+
+::-webkit-datetime-edit-fields-wrapper { 
+    color: #333;
+    padding: 0;
+}
+
+/* Placeholder styling for date inputs */
+input[type="date"]:not(:valid),
+input[type="date"]::-webkit-datetime-edit {
+    color: var(--text-gray);
+}
+
+/* Firefox specific styles */
+input[type="date"]::-moz-calendar-picker-indicator {
+    position: absolute;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Update buttons */
+button {
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 0;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Primary button styles */
+button.btn-next,
+button[type="submit"] {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+button.btn-next:hover,
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Secondary button styles */
+button.btn-prev {
+    background-color: #878787;
+    color: #ffffff;
+    border: 1px solid #E4E7EC;
+}
+
+button.btn-prev:hover {
+    background-color: #7a7a7a;
+    border-color: #D0D5DD;
+    transform: translateY(-1px);
+}
+
+/* International Phone Input Styles */
+.phone-input-container {
+    position: relative;
+}
+
+.iti {
+    width: 100%;
+    display: block;
+}
+
+.iti__flag-container {
+    z-index: 4;
+}
+
+.iti--allow-dropdown input,
+.iti--separate-dial-code input {
+    padding-left: 90px !important;
+    padding-right: 16px;
+    height: 48px;
+}
+
+.iti__selected-flag {
+    background-color: transparent !important;
+    padding: 0 6px 0 12px !important;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: transparent !important;
+    padding: 0 6px 0 12px !important;
+}
+
+.iti--separate-dial-code .iti__selected-dial-code {
+    margin-left: 0;
+    padding-left: 4px;
+    color: var(--text-dark);
+}
+
+/* Remove any placeholder styling */
+.iti input::placeholder {
+    opacity: 0 !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+    .iti__country-list {
+        width: 300px;
+        max-width: 90vw;
+    }
+    
+    .iti__country {
+        padding: 6px 10px;
+    }
+    
+    .iti__country-name,
+    .iti__dial-code {
+        font-size: 13px;
+    }
+}
+
+.form-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: var(--spacing-lg);
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid #EAECF0;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.form-group.full-width {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-column {
+    width: 100%;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 820px) {
+    .form-columns {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding: var(--spacing-lg);
+    }
+    
+    .form-column {
+        grid-column: 1 / -1 !important;
+    }
+}
+
+/* Desktop specific adjustments for Your Details step */
+.form-step[data-step="3"] .form-columns {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-step[data-step="3"] .form-column[style*="grid-column: 1 / -1"] {
+    grid-column: 1 / -1 !important;
+}
+
+/* Mobile specific adjustments for Your Details step */
+@media (max-width: 820px) {
+    .form-step[data-step="3"] .form-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-step[data-step="3"] .form-column {
+        grid-column: 1 / -1 !important;
+    }
+}
+
+/* Add margin to full-width form columns */
+.form-column[style*="grid-column: 1 / -1"] {
+    margin-top: -20px;
+}
+
+/* Remove the border and padding that's causing the difference */
+.form-column + .form-column {
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Make all form fields exactly the same width */
+.form-column input,
+.form-column select {
+    width: 100%;
+    height: 42px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Input specific styles */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--text-dark);
+    background-color: white;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+/* Step Indicator Styles */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #eee;
+    margin: 0 6px;
+    position: relative;
+}
+
+.step-dot.active {
+    background: var(--primary-green);
+}
+
+.step-dot.completed {
+    background: var(--primary-green);
+}
+
+.step-dot::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #eee;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+}
+
+.step-dot:last-child::after {
+    display: none;
+}
+
+.step-dot.completed::after {
+    background: var(--primary-green);
+}
+
+/* Progress Text Styles */
+.progress-text {
+    text-align: center;
+    color: var(--text-dark);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xl);
+}
+
+#progress-percentage {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+/* Form Steps */
+.form-step {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 20px 0;
+}
+
+.form-step.active {
+    display: block !important; /* Override any Webflow styles */
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Override any Webflow default display properties */
+.form-step:not(.active) {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.step-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Car Selection Styles */
+.car-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-xl);
+}
+
+/* Center last row if it has fewer items */
+.car-options::after {
+    content: '';
+    grid-column: span 1;
+}
+
+.car-option {
+    position: relative;
+}
+
+.car-option:nth-last-child(-n+2) {
+    transform: translateX(50%);
+}
+
+.car-option input[type="radio"] {
+    display: none;
+}
+
+.car-label {
+    display: block;
+    cursor: pointer;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-base);
+    overflow: hidden;
+    height: 100%;
+    border: 2px solid transparent;
+    padding: 0;
+}
+
+.car-label:hover {
+    border-color: var(--primary-green);
+}
+
+.car-label img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    padding: var(--spacing-lg);
+    background: white;
+}
+
+/* Remove hover img transform */
+.car-label:hover img {
+    transform: none;
+}
+
+.car-option input[type="radio"]:checked + .car-label {
+    border: 2px solid var(--primary-green);
+    background: white;
+}
+
+/* Remove checked img transform */
+.car-option input[type="radio"]:checked + .car-label img {
+    transform: none;
+}
+
+.car-info {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: white;
+}
+
+.car-info h4 {
+    color: var(--text-dark);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.car-info p {
+    color: var(--text-gray);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.car-details {
+    display: flex;
+    gap: var(--spacing-xl);
+    color: var(--text-gray);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) 0;
+    border-top: 1px solid var(--border-light);
+}
+
+.car-details span {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding-left: 0;
+}
+
+.car-details span img {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+}
+
+/* Transmission Select */
+.transmission-select {
+    margin: var(--spacing-xl) auto;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.transmission-select.has-error select {
+    border-color: #FF4D4F !important;
+    background-color: #FFF2F0;
+}
+
+.transmission-select select {
+    width: 100%;
+    height: 48px;
+    padding: 8px 40px 8px 16px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    background-color: white;
+    color: var(--text-dark);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: var(--transition-base);
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23667085' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#transmission-error {
+    display: none;
+    color: #FF4D4F;
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.transmission-select.has-error #transmission-error {
+    display: block;
+}
+
+/* Continue Button */
+.btn-next {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-base);
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.btn-next:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Error Styles */
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea,
+.form-group.has-error .phone-input-container .iti__flag-container + input {
+    border-color: #FF4D4F !important;
+    background-color: #FFF2F0;
+}
+
+.form-group.has-error label {
+    color: #FF4D4F;
+}
+
+.error-message {
+    display: none;
+    color: #FF4D4F;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+    position: relative;
+    z-index: 0;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}
+
+/* Focus state for error fields */
+.form-group.has-error input:focus,
+.form-group.has-error select:focus,
+.form-group.has-error textarea:focus {
+    border-color: #FF4D4F !important;
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+    outline: none;
+}
+
+/* Validation success state */
+.form-group.is-valid input,
+.form-group.is-valid select,
+.form-group.is-valid textarea {
+    border-color: #52C41A !important;
+}
+
+/* Car selection error state */
+.car-options.has-error {
+    border: 1px solid #FF4D4F;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    background-color: #FFF2F0;
+}
+
+.car-options.has-error + .error-message {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Error summary at the top of the form */
+.error-summary {
+    display: none;
+    background-color: #FFF2F0;
+    border: 1px solid #FF4D4F;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.error-summary.visible {
+    display: block;
+}
+
+.error-summary h4 {
+    color: #FF4D4F;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.error-summary ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.error-summary li {
+    color: #FF4D4F;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.error-summary li:last-child {
+    margin-bottom: 0;
+}
+
+/* Summary Styles */
+.form-step[data-step="4"] .form-group h4 {
+    color: var(--text-dark);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-item {
+    padding: var(--spacing-xs) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    color: var(--text-gray);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.summary-value {
+    color: var(--text-dark);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.edit-step {
+    color: var(--primary-green);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: var(--transition-base);
+}
+
+.edit-step:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Summary Section Styles */
+.summary-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.summary-container {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid #EAECF0;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.summary-container h4 {
+    color: var(--text-dark);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    color: var(--text-gray);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.summary-value {
+    color: var(--text-dark);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-align: right;
+}
+
+@media (max-width: 820px) {
+    .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) 0;
+    }
+
+    .summary-value {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/* Form Navigation Styles */
+.form-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--spacing-xl);
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-light);
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Keep navigation buttons consistent size */
+.form-navigation button {
+    width: 160px;
+    height: 44px;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Dropdown Arrow - Updated */
+select {
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 5.25L7 8.75L10.5 5.25' stroke='%2398A2B3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-position: right 14px center;
+    padding-right: 40px !important;
+    cursor: pointer;
+}
+
+/* Date Input - Updated */
+input[type="date"] {
+    position: relative;
+    padding-right: 40px !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    color: #98A2B3;
+    opacity: 1;
+}
+
+/* Number Input - Updated */
+input[type="number"] {
+    padding-right: 16px !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 820px) {
+    .form-columns {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: var(--spacing-lg);
+    }
+    
+    .form-group.full-width {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* Update media queries */
+@media (max-width: 1024px) {
+    .booking-container {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    .car-options {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0;
+    }
+
+    .car-option:nth-last-child(-n+2) {
+        transform: none;
+    }
+
+    .car-label img {
+        height: 160px;
+    }
+}
+
+@media (max-width: 820px) {
+    .booking-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 24px;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .car-options {
+        gap: var(--spacing-md);
+    }
+
+    .form-columns {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .form-column + .form-column {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .car-label {
+        padding: 0;
+    }
+
+    .car-label img {
+        height: 140px;
+    }
+
+    .car-info {
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+
+    .car-info h4 {
+        font-size: 16px;
+    }
+
+    .car-info p {
+        font-size: 13px;
+    }
+
+    .car-details {
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+}
+
+/* Add iPhone SE / small phone breakpoint */
+@media (max-width: 375px) {
+    .booking-container {
+        padding: 16px;
+    }
+
+    .car-label img {
+        height: 120px;
+    }
+
+    .form-navigation button {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .step-title {
+        margin-bottom: 20px;
+    }
+}
+
+/* Update media queries for better tablet/iPad support */
+@media (min-width: 1024px) {
+    .car-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .car-label img {
+        height: 160px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .car-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .car-label img {
+        height: 160px;
+    }
+
+    .booking-container {
+        max-width: 720px;
+        padding: 32px;
+    }
+}
+
+/* Existing mobile styles */
+@media (max-width: 767px) {
+    .car-options {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .car-label img {
+        height: 180px;
+    }
+
+    .car-details {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) 0;
+    }
+
+    /* Mobile font size adjustments */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+        font-size: 14px;
+        height: 38px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    .helper-text {
+        font-size: 11px;
+    }
+
+    .step-title {
+        font-size: 18px;
+    }
+
+    select option {
+        font-size: 14px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        font-size: 14px;
+    }
+
+    .summary-label,
+    .summary-value {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .car-options {
+        grid-template-columns: 1fr;
+    }
+
+    .car-label img {
+        height: 160px;
+    }
+
+    /* Even smaller font sizes for very small screens */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+        font-size: 13px;
+        height: 36px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .helper-text {
+        font-size: 10px;
+    }
+
+    .form-navigation {
+        gap: var(--spacing-sm);
+    }
+    
+    .form-navigation button {
+        width: 140px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .car-label img {
+        height: 120px;
+    }
+}
+
+/* Add after the reset styles */
+button, 
+label,
+.car-label,
+.car-label img,
+.car-info,
+.car-details,
+.step-dot,
+.step-title,
+h2, h3, h4, p,
+.car-info p,
+.car-info h4,
+select,
+.transmission-select,
+.edit-step,
+.summary-section,
+.summary-label,
+.summary-value,
+#progress-percentage,
+.progress-text {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Add cursor styles for interactive elements */
+button,
+select,
+.car-label,
+.edit-step,
+input[type="date"],
+input[type="radio"] + label {
+    cursor: pointer;
+}
+
+/* Add text cursor for input fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea {
+    cursor: text;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 1px;
+}
+
+/* Input with Icon Container */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon .icon {
+    position: absolute;
+    left: 14px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    color: var(--primary-green);
+    z-index: 1;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    padding: 12px 16px 12px 44px;
+    height: 48px;
+    background: white;
+    border: 1px solid #E4E7EC;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    width: 100%;
+    transition: var(--transition-base);
+    color: var(--text-dark);
+}
+
+/* Car icon specific styles */
+.car-icon {
+    position: absolute;
+    left: 14px;
+    width: 23px;
+    height: 10px;
+    pointer-events: none;
+    color: var(--primary-green);
+    z-index: 1;
+}
+
+/* Error message positioning */
+.error-message {
+    display: none;
+    color: #FF4D4F;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+    position: relative;
+    z-index: 0;
+}
+
+/* Add these new styles */
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: transparent !important;
+    padding-left: 12px !important;
+}
+
+.iti--separate-dial-code input {
+    padding-left: 100px !important;
+}
+
+.iti--separate-dial-code .iti__selected-dial-code {
+    padding-left: 12px;
+    color: var(--text-dark);
+} 
