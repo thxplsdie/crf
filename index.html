@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Booking Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css">
+</head>
+<body>
+    <div class="booking-container">
+        <div class="step-indicator">
+            <div class="step-dot active" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-dot" data-step="3"></div>
+            <div class="step-dot" data-step="4"></div>
+        </div>
+        <div class="progress-text">
+            <span id="progress-percentage">25%</span>
+        </div>
+
+        <style>
+            /* Previous styles remain the same until textarea styles */
+            
+            textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+                resize: vertical;
+                min-height: 100px;
+                font-family: inherit;
+            }
+
+            .helper-text {
+                color: #666;
+                font-size: 12px;
+                margin-top: 4px;
+                display: block;
+            }
+
+            select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 8px center;
+                padding-right: 24px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+            /* All previous styles remain the same */
+        </style>
+
+        <form id="bookingForm">
+            <input type="hidden" name="_next" value="https://head-norths-radical-site.webflow.io/thank-you" id="redirect-url">
+            <input type="hidden" name="_captcha" value="false">
+
+            <!-- Step 1: Vehicle Selection -->
+            <div class="form-step active" data-step="1">
+                <h3 class="step-title">Select Your Vehicle</h3>
+                <div class="car-options" id="car-options">
+                    <div class="car-option">
+                        <input type="radio" id="small" name="carType" value="SMALL" required>
+                        <label for="small" class="car-label">
+                            <img src="images/fordfiesta.png" alt="Small Car - Ford Fiesta">
+                            <div class="car-info">
+                                <h4>Small</h4>
+                                <p>Ford Fiesta or Similar</p>
+                                <div class="car-details">
+                                    <span>
+                                        <img src="icons/car-seat.svg" alt="Passengers">
+                                        3 Passengers
+                                    </span>
+                                    <span>
+                                        <img src="icons/luggage.svg" alt="Luggage">
+                                        2 Bags
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="car-option">
+                        <input type="radio" id="compact" name="carType" value="COMPACT" required>
+                        <label for="compact" class="car-label">
+                            <img src="images/opelastra.png" alt="Compact Car - Opel Astra">
+                            <div class="car-info">
+                                <h4>Compact</h4>
+                                <p>Opel Astra or Similar</p>
+                                <div class="car-details">
+                                    <span>
+                                        <img src="icons/car-seat.svg" alt="Passengers">
+                                        5 Passengers
+                                    </span>
+                                    <span>
+                                        <img src="icons/luggage.svg" alt="Luggage">
+                                        2 Bags
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="car-option">
+                        <input type="radio" id="standard" name="carType" value="STANDARD" required>
+                        <label for="standard" class="car-label">
+                            <img src="images/skodaoctavia.png" alt="Standard Car - Skoda Octavia">
+                            <div class="car-info">
+                                <h4>Standard</h4>
+                                <p>Skoda Octavia or Similar</p>
+                                <div class="car-details">
+                                    <span>
+                                        <img src="icons/car-seat.svg" alt="Passengers">
+                                        5 Passengers
+                                    </span>
+                                    <span>
+                                        <img src="icons/luggage.svg" alt="Luggage">
+                                        3 Bags
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="car-option">
+                        <input type="radio" id="suv" name="carType" value="SUV" required>
+                        <label for="suv" class="car-label">
+                            <img src="images/peugeot5008.png" alt="SUV - Peugeot 5008">
+                            <div class="car-info">
+                                <h4>SUV</h4>
+                                <p>Peugeot 5008 or Similar</p>
+                                <div class="car-details">
+                                    <span>
+                                        <img src="icons/car-seat.svg" alt="Passengers">
+                                        5 Passengers
+                                    </span>
+                                    <span>
+                                        <img src="icons/luggage.svg" alt="Luggage">
+                                        4 Bags
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="car-option">
+                        <input type="radio" id="van" name="carType" value="9 SEATER" required>
+                        <label for="van" class="car-label">
+                            <img src="images/opelvivaro.png" alt="9 Seater - Opel Vivaro">
+                            <div class="car-info">
+                                <h4>9 Seater</h4>
+                                <p>Opel Vivaro or Similar</p>
+                                <div class="car-details">
+                                    <span>
+                                        <img src="icons/car-seat.svg" alt="Passengers">
+                                        9 Passengers
+                                    </span>
+                                    <span>
+                                        <img src="icons/luggage.svg" alt="Luggage">
+                                        8 Bags
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="error-message" id="car-type-error">Please select a vehicle type</div>
+
+                <div class="transmission-select">
+                    <select id="transmission" name="transmission" required>
+                        <option value="">Select transmission</option>
+                        <option value="AUTOMATIC">Automatic</option>
+                        <option value="MANUAL">Manual</option>
+                    </select>
+                    <div class="error-message" id="transmission-error">Please select a transmission type</div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn-next">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Rental Details -->
+            <div class="form-step" data-step="2">
+                <h3 class="step-title">Rental Details</h3>
+                <div class="form-columns">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="pickupLocation">Pickup location</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 10.8333C11.3807 10.8333 12.5 9.71404 12.5 8.33333C12.5 6.95262 11.3807 5.83333 10 5.83333C8.61929 5.83333 7.5 6.95262 7.5 8.33333C7.5 9.71404 8.61929 10.8333 10 10.8333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 18.3333C13.3333 15 16.6667 12.0152 16.6667 8.33333C16.6667 4.65144 13.6819 1.66666 10 1.66666C6.31811 1.66666 3.33334 4.65144 3.33334 8.33333C3.33334 12.0152 6.66668 15 10 18.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <select id="pickupLocation" name="pickupLocation" required>
+                                <option value="">Select pickup location</option>
+                                <option value="Dublin Airport">Dublin Airport</option>
+                                <option value="Dublin City (St. Stephen's Green)">Dublin City (St. Stephen's Green)</option>
+                                <option value="Dublin City (Russell St.)">Dublin City (Russell St.)</option>
+                                <option value="Dublin West (Kylemore)">Dublin West (Kylemore)</option>
+                                <option value="Dublin North (Finglas)">Dublin North (Finglas)</option>
+                                <option value="Dublin Tallaght">Dublin Tallaght</option>
+                                <option value="Dun Laoghaire">Dun Laoghaire</option>
+                                <option value="Swords">Swords</option>
+                                <option value="Naas">Naas</option>
+                                <option value="Drogheda">Drogheda</option>
+                                <option value="Waterford">Waterford</option>
+                                <option value="Athlone">Athlone</option>
+                                <option value="Cavan">Cavan</option>
+                                <option value="Sligo">Sligo</option>
+                                <option value="Ennis">Ennis</option>
+                                <option value="Letterkenny">Letterkenny</option>
+                                <option value="South Cork">South Cork</option>
+                                <option value="North Cork">North Cork</option>
+                                <option value="Cork Airport">Cork Airport</option>
+                                <option value="Donegal Airport">Donegal Airport</option>
+                                <option value="Kerry Airport">Kerry Airport</option>
+                                <option value="Shannon Airport">Shannon Airport</option>
+                                <option value="Galway">Galway</option>
+                                <option value="Castlebar">Castlebar</option>
+                                <option value="Kilkenny">Kilkenny</option>
+                                <option value="Limerick">Limerick</option>
+                                <option value="Wexford">Wexford</option>
+                                <option value="Tralee">Tralee</option>
+                                <option value="Belfast International Airport">Belfast International Airport</option>
+                                <option value="Belfast City Airport">Belfast City Airport</option>
+                            </select>
+                            <div class="error-message" id="pickupLocation-error">Please select a pickup location</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickupDate">Pickup date</label>
+                            <input type="date" id="pickupDate" name="pickupDate" required>
+                            <div class="error-message" id="pickupDate-error">Please select a pickup date</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickupTime">Pickup time</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 5.83333V10L12.5 12.5M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <select id="pickupTime" name="pickupTime" required>
+                                <option value="">Select pickup time</option>
+                            </select>
+                            <div class="error-message" id="pickupTime-error">Please select a pickup time</div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="returnLocation">Return location</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 10.8333C11.3807 10.8333 12.5 9.71404 12.5 8.33333C12.5 6.95262 11.3807 5.83333 10 5.83333C8.61929 5.83333 7.5 6.95262 7.5 8.33333C7.5 9.71404 8.61929 10.8333 10 10.8333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 18.3333C13.3333 15 16.6667 12.0152 16.6667 8.33333C16.6667 4.65144 13.6819 1.66666 10 1.66666C6.31811 1.66666 3.33334 4.65144 3.33334 8.33333C3.33334 12.0152 6.66668 15 10 18.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <select id="returnLocation" name="returnLocation" required>
+                                <option value="">Select return location</option>
+                                <option value="Dublin Airport">Dublin Airport</option>
+                                <option value="Dublin City (St. Stephen's Green)">Dublin City (St. Stephen's Green)</option>
+                                <option value="Dublin City (Russell St.)">Dublin City (Russell St.)</option>
+                                <option value="Dublin West (Kylemore)">Dublin West (Kylemore)</option>
+                                <option value="Dublin North (Finglas)">Dublin North (Finglas)</option>
+                                <option value="Dublin Tallaght">Dublin Tallaght</option>
+                                <option value="Dun Laoghaire">Dun Laoghaire</option>
+                                <option value="Swords">Swords</option>
+                                <option value="Naas">Naas</option>
+                                <option value="Drogheda">Drogheda</option>
+                                <option value="Waterford">Waterford</option>
+                                <option value="Athlone">Athlone</option>
+                                <option value="Cavan">Cavan</option>
+                                <option value="Sligo">Sligo</option>
+                                <option value="Ennis">Ennis</option>
+                                <option value="Letterkenny">Letterkenny</option>
+                                <option value="South Cork">South Cork</option>
+                                <option value="North Cork">North Cork</option>
+                                <option value="Cork Airport">Cork Airport</option>
+                                <option value="Donegal Airport">Donegal Airport</option>
+                                <option value="Kerry Airport">Kerry Airport</option>
+                                <option value="Shannon Airport">Shannon Airport</option>
+                                <option value="Galway">Galway</option>
+                                <option value="Castlebar">Castlebar</option>
+                                <option value="Kilkenny">Kilkenny</option>
+                                <option value="Limerick">Limerick</option>
+                                <option value="Wexford">Wexford</option>
+                                <option value="Tralee">Tralee</option>
+                                <option value="Belfast International Airport">Belfast International Airport</option>
+                                <option value="Belfast City Airport">Belfast City Airport</option>
+                            </select>
+                            <div class="error-message" id="returnLocation-error">Please select a return location</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="returnDate">Return date</label>
+                            <input type="date" id="returnDate" name="returnDate" required>
+                            <div class="error-message" id="returnDate-error">Please select a return date</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="returnTime">Return time</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 5.83333V10L12.5 12.5M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <select id="returnTime" name="returnTime" required>
+                                <option value="">Select return time</option>
+                            </select>
+                            <div class="error-message" id="returnTime-error">Please select a return time</div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-column" style="grid-column: 1 / -1;">
+                        <div class="form-group">
+                            <label for="passengers">How many people in your party?</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M13.3333 17.5V15.8333C13.3333 14.9493 12.9821 14.1014 12.357 13.4763C11.7319 12.8512 10.884 12.5 9.99999 12.5H4.99999C4.11593 12.5 3.26809 12.8512 2.64297 13.4763C2.01785 14.1014 1.66666 14.9493 1.66666 15.8333V17.5M15.8333 6.66667C16.7538 6.66667 17.5 5.92047 17.5 5C17.5 4.07952 16.7538 3.33333 15.8333 3.33333C14.9129 3.33333 14.1667 4.07952 14.1667 5C14.1667 5.92047 14.9129 6.66667 15.8333 6.66667ZM10.8333 5C10.8333 6.84095 9.34095 8.33333 7.49999 8.33333C5.65904 8.33333 4.16666 6.84095 4.16666 5C4.16666 3.15905 5.65904 1.66667 7.49999 1.66667C9.34095 1.66667 10.8333 3.15905 10.8333 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <input type="number" id="passengers" name="passengers" required min="0" max="20" placeholder="Enter number of passengers">
+                            </div>
+                            <div class="error-message" id="passengers-error">Please enter a valid number of passengers (0-20)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Please confirm you are over 25 years of age</label>
+                            <select id="age" name="age" required>
+                                <option value="">Select</option>
+                                <option value="yes">Yes, I am over 25</option>
+                                <option value="no">No, I am under 25</option>
+                            </select>
+                            <div class="error-message" id="age-error">Please confirm your age</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="international">Are you intending to take the car to Scotland, England, Wales?</label>
+                            <div class="input-with-icon">
+                                <svg class="car-icon" width="23" height="10" viewBox="0 0 23 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.38195 2.33614C1.93058 2.59746 1.50297 2.69248 1.2654 3.00132C1.02784 3.2864 1.00408 3.76152 1.05159 4.02285C1.09911 4.30792 1.19413 4.37919 1.17038 4.52173C1.17038 4.64051 1.05159 4.80681 0.956569 4.94935C0.837786 5.06813 0.719004 5.18691 0.623978 5.37696C0.528953 5.59077 0.457683 5.8996 0.528953 6.39849C0.623978 6.89737 0.861543 7.56255 1.36043 7.89514C1.85931 8.22774 2.57201 8.25149 2.92835 8.25149H3.02338C2.97587 8.03768 2.95211 7.82388 2.95211 7.61007C2.95211 6.37473 3.94988 5.37696 5.18521 5.37696C6.42055 5.37696 7.41832 6.37473 7.41832 7.61007C7.41832 7.82388 7.39456 8.03768 7.32329 8.25149H15.0679C15.0204 8.06144 14.9729 7.84763 14.9729 7.61007C14.9729 6.37473 15.9706 5.37696 17.206 5.37696C18.4413 5.37696 19.4391 6.37473 19.4391 7.61007C19.4391 7.82388 19.4153 8.03768 19.3441 8.25149C21.3871 8.25149 21.4346 8.22774 21.6009 8.13271C21.791 8.01393 22.1473 7.80012 22.3374 7.39626C22.5274 6.9924 22.5274 6.42225 22.4561 6.08966C22.3849 5.78082 22.1948 5.73331 22.1711 5.59077C22.1236 5.47199 22.2186 5.25818 22.2423 4.94935C22.2423 4.64051 22.1711 4.23665 21.6959 4.02285C21.2208 3.80904 20.3893 3.80904 19.3916 3.6665C18.3938 3.52396 17.2535 3.23888 16.4933 2.88254C15.7331 2.52619 15.3292 2.12233 14.7115 1.74223C14.0939 1.36212 13.2624 1.00578 12.0033 0.768214C10.7442 0.554406 9.05751 0.483137 7.58461 0.578162C6.13547 0.696944 4.90014 0.982021 4.09242 1.33837C3.26094 1.69471 2.80957 2.07482 2.38195 2.33614Z" fill="#30BD76"/>
+                                </svg>
+                                <select id="international" name="international" required>
+                                    <option value="">Select</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="error-message" id="international-error">Please select yes or no</div>
+                            <span class="helper-text">One way not possible - you have to bring it back to Ireland</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" class="btn-prev">Previous</button>
+                    <button type="button" class="btn-next">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Personal Information -->
+            <div class="form-step" data-step="3">
+                <h3 class="step-title">Your Details</h3>
+                <div class="form-columns">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M16.6667 17.5V15.8333C16.6667 14.9493 16.3155 14.1014 15.6904 13.4763C15.0653 12.8512 14.2174 12.5 13.3333 12.5H6.66667C5.78261 12.5 4.93476 12.8512 4.30964 13.4763C3.68452 14.1014 3.33333 14.9493 3.33333 15.8333V17.5M13.3333 5.83333C13.3333 7.67428 11.8409 9.16667 10 9.16667C8.15905 9.16667 6.66667 7.67428 6.66667 5.83333C6.66667 3.99238 8.15905 2.5 10 2.5C11.8409 2.5 13.3333 3.99238 13.3333 5.83333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name" aria-describedby="fullName-error">
+                            </div>
+                            <div class="error-message" id="fullName-error">Please enter your full name</div>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-with-icon">
+                                <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M18.3333 5C18.3333 4.08334 17.5833 3.33334 16.6667 3.33334H3.33333C2.41667 3.33334 1.66667 4.08334 1.66667 5M18.3333 5V15C18.3333 15.9167 17.5833 16.6667 16.6667 16.6667H3.33333C2.41667 16.6667 1.66667 15.9167 1.66667 15V5M18.3333 5L10 10.8333L1.66667 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email" aria-describedby="email-error">
+                            </div>
+                            <div class="error-message" id="email-error">Please enter a valid email address</div>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="phone">Phone number</label>
+                            <div class="phone-input-container">
+                                <input type="tel" id="phone" name="phone" required aria-describedby="phone-error">
+                            </div>
+                            <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="zipCode">Zip/Postal Code</label>
+                            <input type="text" id="zipCode" name="zipCode" required placeholder="Enter your zip/postal code">
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="firstVisit">Is this your first visit to Ireland?</label>
+                            <select id="firstVisit" name="firstVisit" required>
+                                <option value="">Select</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                            <div class="error-message" id="firstVisit-error">Please select yes or no</div>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="occasion">Is this a special occasion trip? (Optional)</label>
+                            <select id="occasion" name="occasion">
+                                <option value="">Select if applicable</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Engagement">Engagement</option>
+                                <option value="Wedding">Wedding</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-column" style="grid-column: 1 / -1;">
+                        <div class="form-group">
+                            <label for="referral">How did you hear about us?</label>
+                            <select id="referral" name="referral" required>
+                                <option value="">Select</option>
+                                <option value="I am a returning Cousin">I am a returning Cousin</option>
+                                <option value="Friend">Friend</option>
+                                <option value="Google">Google</option>
+                                <option value="Facebook Advertising">Facebook Advertising</option>
+                                <option value="TripAdvisor">TripAdvisor</option>
+                                <option value="Pinterest">Pinterest</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="Facebook Travel Groups">Facebook Travel Groups</option>
+                                <option value="Irish Central">Irish Central</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="error-message" id="referral-error">Please tell us how you heard about us</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="questions">Have you any particular questions or queries we can help you with? (Optional)</label>
+                            <textarea id="questions" name="questions" rows="4" placeholder="Type your message here"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" class="btn-prev">Previous</button>
+                    <button type="button" class="btn-next">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Summary -->
+            <div class="form-step" data-step="4">
+                <h3 class="step-title">Review Your Information</h3>
+                <div class="summary-section">
+                    <!-- Selected Vehicle Section -->
+                    <div class="summary-container">
+                        <h4>Selected Vehicle <span class="edit-step" data-goto="1">Edit</span></h4>
+                        <div class="summary-item">
+                            <span class="summary-label">Vehicle Type:</span>
+                            <span class="summary-value" id="summary-car-type">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Transmission:</span>
+                            <span class="summary-value" id="summary-transmission">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Rental Details Section -->
+                    <div class="summary-container">
+                        <h4>Rental Details <span class="edit-step" data-goto="2">Edit</span></h4>
+                        <div class="summary-item">
+                            <span class="summary-label">Pickup Location:</span>
+                            <span class="summary-value" id="summary-pickup-location">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Pickup Date & Time:</span>
+                            <span class="summary-value" id="summary-pickup-datetime">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Return Location:</span>
+                            <span class="summary-value" id="summary-return-location">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Return Date & Time:</span>
+                            <span class="summary-value" id="summary-return-datetime">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Number of Passengers:</span>
+                            <span class="summary-value" id="summary-passengers">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Age Verification:</span>
+                            <span class="summary-value" id="summary-age">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">International Travel:</span>
+                            <span class="summary-value" id="summary-international">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Personal Details Section -->
+                    <div class="summary-container">
+                        <h4>Personal Details <span class="edit-step" data-goto="3">Edit</span></h4>
+                        <div class="summary-item">
+                            <span class="summary-label">Name:</span>
+                            <span class="summary-value" id="summary-name">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Email:</span>
+                            <span class="summary-value" id="summary-email">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Phone:</span>
+                            <span class="summary-value" id="summary-phone">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">First Visit to Ireland:</span>
+                            <span class="summary-value" id="summary-first-visit">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Special Occasion:</span>
+                            <span class="summary-value" id="summary-occasion">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Referral Source:</span>
+                            <span class="summary-value" id="summary-referral">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Questions/Comments:</span>
+                            <span class="summary-value" id="summary-questions">-</span>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn-prev">Previous</button>
+                            <button type="submit">Send Inquiry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+</body>
+</html> 
